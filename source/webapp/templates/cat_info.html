@@ -1,0 +1,41 @@
+{% load static %}
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="{% static "css/style.css" %}">
+</head>
+<body style="background-color: aquamarine">
+{% if cat.happiness >= 70 %}
+  <img src="{% static 'happy.png' %}" alt="Happy Cat">
+{% elif cat.happiness >= 30 %}
+  <img src="{% static 'neutral.png' %}" alt="Neutral Cat">
+{% else %}
+  <img src="{% static 'sad.png' %}" alt="Sad Cat">
+{% endif %}
+<h1 style="color: black">Cat Info</h1>
+<p style="color: black">Name: {{ cat.name }}</p>
+<p style="color: black">Age: {{ cat.age }}</p>
+<p style="color: black">Hunger: {{ cat.hunger }}</p>
+<p style="color: black">Happiness: {{ cat.happiness }}</p>
+
+<form method="post">
+  {% csrf_token %}
+    <label>
+        <select name="action">
+          <option value="feed">Feed</option>
+          <option value="play">Play</option>
+          <option value="sleep">Sleep</option>
+        </select>
+    </label>
+    <button type="submit">Interact</button>
+</form>
+
+</body>
+</html>
